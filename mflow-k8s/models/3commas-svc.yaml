@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: 3commas
+  namespace: multiflow
+spec:
+  selector:
+    app: 3commas
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8083

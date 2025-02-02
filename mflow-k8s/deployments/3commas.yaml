@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 3commas
+  namespace: multiflow
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: 3commas
+  template:
+    metadata:
+      labels:
+        app: 3commas
+    spec:
+      containers:
+        - name: 3commas
+          image: 3commas/3commas:latest
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "250m"
+            limits:
+              memory: "2Gi"
+              cpu: "500m"
+          env:
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: multiflow-secrets
+                  key: 3commas-api-key
+          ports:
+            - containerPort: 8083

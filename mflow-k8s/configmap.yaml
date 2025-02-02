@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: multiflow-config
+  namespace: multiflow
+data:
+  LOG_LEVEL: "info"
+  MAX_CONNECTIONS: "100"

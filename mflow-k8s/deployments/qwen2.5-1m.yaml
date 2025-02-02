@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qwen2-5-1m
+  namespace: multiflow
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: qwen2-5-1m
+  template:
+    metadata:
+      labels:
+        app: qwen2-5-1m
+    spec:
+      containers:
+        - name: qwen2-5-1m
+          image: qwen/qwen2.5-1m:latest
+          resources:
+            requests:
+              memory: "4Gi"
+              cpu: "1"
+            limits:
+              memory: "8Gi"
+              cpu: "2"
+          envFrom:
+            - configMapRef:
+                name: multiflow-config
+          ports:
+            - containerPort: 8081

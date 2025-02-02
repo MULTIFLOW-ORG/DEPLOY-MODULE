@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: qwen2-5-1m
+  namespace: multiflow
+spec:
+  selector:
+    app: qwen2-5-1m
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8081

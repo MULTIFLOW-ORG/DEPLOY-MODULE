@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpt-4
+  namespace: multiflow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gpt-4
+  template:
+    metadata:
+      labels:
+        app: gpt-4
+    spec:
+      containers:
+        - name: gpt-4
+          image: openai/gpt-4:latest
+          resources:
+            requests:
+              memory: "8Gi"
+              cpu: "2"
+            limits:
+              memory: "16Gi"
+              cpu: "4"
+          envFrom:
+            - secretRef:
+                name: multiflow-secrets
+          ports:
+            - containerPort: 8082

@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: multiflow-ingress
+  namespace: multiflow
+spec:
+  rules:
+    - host: multiflow.local
+      http:
+        paths:
+          - path: /deepseek
+            pathType: Prefix
+            backend:
+              service:
+                name: deepseek-r1
+                port:
+                  number: 80
+          - path: /qwen
+            pathType: Prefix
+            backend:
+              service:
+                name: qwen2-5-1m
+                port:
+                  number: 80
+          - path: /gpt4
+            pathType: Prefix
+            backend:
+              service:
+                name: gpt-4
+                port:
+                  number: 80
+          - path: /3commas
+            pathType: Prefix
+            backend:
+              service:
+                name: 3commas
+                port:
+                  number: 80

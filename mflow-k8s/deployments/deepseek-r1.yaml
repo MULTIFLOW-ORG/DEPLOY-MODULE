@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deepseek-r1
+  namespace: multiflow
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deepseek-r1
+  template:
+    metadata:
+      labels:
+        app: deepseek-r1
+    spec:
+      containers:
+        - name: deepseek-r1
+          image: deepseek/deepseek-r1:latest
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "500m"
+            limits:
+              memory: "4Gi"
+              cpu: "1"
+          envFrom:
+            - configMapRef:
+                name: multiflow-config
+          ports:
+            - containerPort: 8080
