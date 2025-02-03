@@ -1,0 +1,1 @@
+kubectl apply -f multiflow-k8s/
