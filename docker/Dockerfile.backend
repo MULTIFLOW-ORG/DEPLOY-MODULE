@@ -1,0 +1,23 @@
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.10
+
+COPY ./backend/requirements.txt /app/requirements.txt
+
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
+ENV PORT 8080
+EXPOSE 8080
+
+COPY ./multiflow-shared /multiflow-shared
+RUN pip install -e /multiflow-shared
+
+COPY ./multiflow-data /multiflow-data
+RUN pip install -e /multiflow-data
+
+COPY ./backend/alembic /app/alembic
+COPY ./backend/alembic.ini /app/alembic.ini
+COPY ./backend/main.py /app/main.py
+COPY ./backend/import.py /app/import.py
+COPY ./backend/export.py /app/export.py
+COPY ./backend/rerank.py /app/rerank.py
+COPY ./backend/multiflow_backend /app/multiflow_backend
+COPY ./backend/test_data /app/test_data
